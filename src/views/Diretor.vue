@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="cadastrar"> <!-- quando submeter chama o metodo cadastrar -->
-            <h2>Trabalho</h2>
+            <h2>Diretor</h2>
             <p>
                 <label for="titulo">Título</label>
                 <input type="text" id="titulo" 
@@ -40,25 +40,25 @@
 
 <script>
     import axios from 'axios';
-    import {mapState} from 'vuex'; // para pegar usuario e senha folder store
+    import {mapState} from 'vuex';      // para pegar usuario e senha folder store
     export default {
         name: 'anotacoes',
         data() {
             return {
-                titulo: '', // responsavel pelos v-model no template la em cima
+                titulo: '',             // responsavel pelos v-model no template la em cima
                 localArquivo: '',
                 trabalhos: []
             }
         },
         computed: {
-            ...mapState([ // state da classe About.vue | login
-                'usuario',
+            ...mapState([               // state da classe Login.vue | login
+                'usuario',              //vuex
                 'senha'
             ])
         },
         methods: {
             cadastrar() {
-                axios.post('trabalho', // rota responsavel
+                axios.post('diretor',   // rota responsavel
                     {                                       // essa rota espera um json, basicamente passamos como objeto parao o axios e ele monta um json como retorno
                         titulo: this.titulo,                // oque será mandado no corpo da requisição
                         dataHoraEntrega: new Date(),           

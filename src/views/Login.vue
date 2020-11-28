@@ -49,7 +49,7 @@
             sucesso() {
                 this.setUsuario(this.nome);
                 this.setSenha(this.senha);
-                this.$router.push('/trabalho');
+                this.$router.push('/diretor');
             }
         }
     }
