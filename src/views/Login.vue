@@ -16,6 +16,7 @@
 <script>
     import axios from 'axios';
     import {mapMutations} from 'vuex'; // mutations & state the folder store
+    
     export default {
         name: 'Home',
         data() {

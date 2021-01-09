@@ -26,8 +26,9 @@ Vue.use(VueRouter)
   {
     path: '/diretor',
     name: 'Diretor',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Diretor.vue')
+    component: () => import('../views/Diretor.vue')
   },
+  
 ]
 
 const router = new VueRouter({
