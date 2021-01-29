@@ -14,44 +14,36 @@
 </template>
 
 <script>
-    import axios from 'axios';
-    import {mapMutations} from 'vuex'; // mutations & state the folder store
-    
-    export default {
-        name: 'Home',
-        data() {
-            return {
-                nome: '',
-                senha: ''
-            }
-        },
-        methods: {
-            ...mapMutations ([
-                'setUsuario',
-                'setSenha'
-            ]),
-            login() {
-                axios.get('login', //rota a ser logada
-                { params: { id: 1 }, headers: { Accept: 'application/json'}, auth: { username: this.nome, password: this.senha } })
-                .then(res => {
-                    console.log(res);
-                    this.sucesso(); // se der tudo certo chama sucesso
-                })
-                .catch(error => {
-                    console.log(error);
-                    if (error.response.status === 401) {
-                        console.log('Usuário ou senha inválido!'); // se der errado retorna um erro
-                    }
-                    else {
-                        this.sucesso();
-                    }
-                });
-            },
-            sucesso() {
-                this.setUsuario(this.nome);
-                this.setSenha(this.senha);
-                this.$router.push('/diretor');
-            }
-        }
+import axios from 'axios'
+import { mapMutations } from 'vuex'
+
+export default {
+  name: 'login',
+  data() {
+    return {
+      nome: '',
+      senha: ''
     }
+  },
+  methods: {
+    ...mapMutations([
+      'setUsuario',
+      'setToken'
+    ]),
+    login() {
+      axios.post('login',
+          {
+            username: this.nome,
+            password: this.senha
+          })
+        .then(res => {
+          console.log(res)
+          this.setUsuario(res.data)
+          this.setToken(res.headers.token)
+          this.$router.push('diretor')
+        })
+        .catch(error => console.log(error))
+    }
+  }
+}
 </script>

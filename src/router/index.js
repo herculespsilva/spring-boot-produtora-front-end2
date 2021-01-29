@@ -21,14 +21,13 @@ Vue.use(VueRouter)
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/diretor',
     name: 'Diretor',
     component: () => import('../views/Diretor.vue')
-  },
-  
+  }
 ]
 
 const router = new VueRouter({

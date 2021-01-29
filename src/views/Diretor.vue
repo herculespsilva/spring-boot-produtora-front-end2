@@ -3,16 +3,16 @@
         <form @submit.prevent="cadastrar"> <!-- quando submeter chama o metodo cadastrar -->
             <h2>Diretor</h2>
             <p>
-                <label for="titulo">Título</label>
-                <input type="text" id="titulo" 
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" 
                     required autofocus 
-                    v-model="titulo">
+                    v-model="nome">
             </p>
             <p>
-                <label for="localArquivo">Local Arquivo</label>
-                <input type="text" id="localArquivo" 
+                <label for="cpf">Cpf</label>
+                <input type= "number" id="cpf" 
                     required 
-                    v-model="localArquivo">
+                    v-model="cpf">
             </p>
             <button type="submit">Salvar</button>
         </form>
@@ -21,17 +21,15 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Título</th>
-                    <th>Local do Arquivo</th>
-                    <th>Data/hora</th>
+                    <th>Nome</th>
+                    <th>Cpf</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="trab in trabalhos" :key="trab.id">
-                    <td>{{ trab.id }}</td>
-                    <td>{{ trab.titulo }}</td>
-                    <td>{{ trab.localArquivo }}</td>
-                    <td>{{ trab.dataHoraEntrega }}</td>
+                <tr v-for="dir in diretores" :key="dir.id">
+                    <td>{{ dir.id }}</td>
+                    <td>{{ dir.nome }}</td>
+                    <td>{{ dir.cpf }}</td>
                 </tr>
             </tbody>
         </table>
@@ -45,9 +43,9 @@
         name: 'anotacoes',
         data() {
             return {
-                titulo: '',             // responsavel pelos v-model no template la em cima
-                localArquivo: '',
-                trabalhos: []
+                nome: '',             // responsavel pelos v-model no template la em cima
+                cpf: '',
+                diretores: []
             }
         },
         computed: {
@@ -60,9 +58,8 @@
             cadastrar() {
                 axios.post('diretor',   // rota responsavel
                     {                                       // essa rota espera um json, basicamente passamos como objeto parao o axios e ele monta um json como retorno
-                        titulo: this.titulo,                // oque será mandado no corpo da requisição
-                        dataHoraEntrega: new Date(),           
-                        localArquivo: this.localArquivo        //conteudo dos dois input no <content>
+                        nome: this.nome,                // oque será mandado no corpo da requisição           
+                        cpf: this.cpf        //conteudo dos dois input no <content>
                     },
                     {
                         auth: {                             // colocar as propriedades
@@ -73,9 +70,9 @@
                     )
                 .then(res => {
                     console.log(res);                   // se tudo der certo, limpa os campos
-                    this.titulo = '';
-                    this.localArquivo = '';                    // a rota retorna como uma reposta um json com o registro criado | no campo (res.data)
-                    this.trabalhos.push(res.data);      // e insere na lista de tabalhos
+                    this.nome = '';
+                    this.cpf = '';                    // a rota retorna como uma reposta um json com o registro criado | no campo (res.data)
+                    this.diretores.push(res.data);      // e insere na lista de tabalhos
                 })                                      //inserimos a res.data de forma direta, basicamente se pega esse objeto em json e faz um parse o tornando um objetos java script
                 .catch(error => console.log(error))
             }
