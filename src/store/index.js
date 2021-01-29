@@ -10,22 +10,18 @@ const vuexPersist = new VuexPersist({
 })
 
 export default new Vuex.Store({
-
-    plugins: [
+  plugins: [
     vuexPersist.plugin
   ],
-  state: {              //quando logar, coloca o usuario e senha para montar a requisição
-    usuario: '',        //modelo basic
-    senha: ''
+  state: {
+    usuario: null,
+    token: null
   },
   mutations: {
-      setUsuario (state, valor) {
-          state.usuario = valor;
-      },
-      /*setSenha(state, valor) {
-          state.senha = valor;
-      }*/
-      setToken (state, token)  {
+    setUsuario (state, usuario) {
+      state.usuario = usuario
+    },
+    setToken (state, token)  {
       state.token = token
     },
     logout (state) {
@@ -34,7 +30,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-  },
-  modules: {
+
   }
 })
